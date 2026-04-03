@@ -97,7 +97,7 @@ footer a{color:var(--accent)}
 
 @media(max-width:600px){header h1{font-size:1.6em}.book-card{padding:14px}.filter-btn{font-size:.78em;padding:5px 10px}.random-btn{width:100%}}
 
-.cover-img{width:50px;height:75px;border-radius:4px;object-fit:cover;flex-shrink:0;border:1px solid var(--border);opacity:.9;transition:opacity .3s}
+.cover-img{width:100px;height:150px;border-radius:4px;object-fit:cover;flex-shrink:0;border:1px solid var(--border);opacity:.9;transition:opacity .3s}
 .book-card:hover .cover-img{opacity:1}
 .cover-wrap{display:flex;flex-direction:column;justify-content:center;margin-top:6px}
 
@@ -417,7 +417,7 @@ try { var cc = localStorage.getItem('scifi_covers_v1'); if (cc) coverCache = JSO
 function getCoverWrap(idx) {
     var cid = coverMap[idx] || coverCache[idx];
     if (cid) {
-        return '<div class="cover-wrap"><img class="cover-img" src="https://covers.openlibrary.org/b/id/' + cid + '-S.jpg" alt="" loading="lazy"></div>';
+        return '<div class="cover-wrap"><img class="cover-img" src="https://covers.openlibrary.org/b/id/' + cid + '-M.jpg" alt="" loading="lazy"></div>';
     }
     // Placeholder + lazy-load trigger
     return '<div class="cover-wrap"><div class="cover-placeholder cover-img" data-idx="' + idx + '" data-loaded="0">📖</div></div>';
@@ -606,7 +606,7 @@ updateProgress();
                     try { localStorage.setItem('scifi_covers_v1', JSON.stringify(coverCache)); } catch(e) {}
                     var placeholder = document.querySelector('.cover-placeholder[data-idx="' + idx + '"]');
                     if (placeholder) {
-                        placeholder.outerHTML = '<img class="cover-img" src="https://covers.openlibrary.org/b/id/' + cid + '-S.jpg" alt="" loading="lazy">';
+                        placeholder.outerHTML = '<img class="cover-img" src="https://covers.openlibrary.org/b/id/' + cid + '-M.jpg" alt="" loading="lazy">';
                     }
                     console.log('[covers] Found: ' + b.title + ' → #' + cid);
                 }
