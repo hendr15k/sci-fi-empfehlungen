@@ -16,6 +16,7 @@
     --star-gold: #ffd700;
     --top3-border: #6c63ff;
     --new-badge: #00c853;
+    --de-badge: #ff6600;
 }
 * { margin:0; padding:0; box-sizing:border-box; }
 body {
@@ -69,12 +70,32 @@ header .badge {
     position: relative;
 }
 .award-section::before {
-    content: "🏆 HUGO & NEBULA 2025";
+    content: "🏆 HUGO, NEBULA & GOODREADS 2025";
     position: absolute; top: -12px; left: 20px;
     background: #00c853; color: #000;
     font-size: 0.8em; font-weight: 700;
     padding: 3px 12px; border-radius: 8px;
 }
+.series-section {
+    margin: 30px 0; padding: 25px;
+    background: linear-gradient(135deg, #2a1a2e 0%, var(--card) 100%);
+    border: 2px solid #cc55ee; border-radius: 16px;
+    position: relative;
+}
+.series-section::before {
+    content: "📚 WELCHE SERIE ZUERST?";
+    position: absolute; top: -12px; left: 20px;
+    background: #cc55ee; color: #fff;
+    font-size: 0.8em; font-weight: 700;
+    padding: 3px 12px; border-radius: 8px;
+}
+.series-section h3 { color: #cc55ee; margin-bottom: 10px; }
+.series-section .series-order {
+    background: rgba(204,85,238,0.1);
+    padding: 12px; border-radius: 8px;
+    margin: 12px 0;
+}
+.series-section .series-order strong { color: #cc55ee; }
 .filter-bar {
     display: flex; flex-wrap: wrap;
     gap: 8px; margin: 25px 0 15px;
@@ -103,6 +124,7 @@ header .badge {
     box-shadow: 0 8px 30px var(--accent-glow);
 }
 .book-card.new-rec { border-left: 3px solid var(--new-badge); }
+.book-card.de-book { border-left: 3px solid var(--de-badge); }
 .book-header {
     display: flex; justify-content: space-between;
     align-items: flex-start; gap: 12px; flex-wrap: wrap;
@@ -121,6 +143,22 @@ header .badge {
     display: inline-block;
     background: rgba(0,200,83,0.15);
     color: #00c853;
+    font-size: 0.75em; font-weight: 700;
+    padding: 2px 8px; border-radius: 8px;
+    margin-left: 6px; vertical-align: middle;
+}
+.de-tag {
+    display: inline-block;
+    background: rgba(255,102,0,0.15);
+    color: #ff6600;
+    font-size: 0.75em; font-weight: 700;
+    padding: 2px 8px; border-radius: 8px;
+    margin-left: 6px; vertical-align: middle;
+}
+.series-tag {
+    display: inline-block;
+    background: rgba(204,85,238,0.15);
+    color: #cc55ee;
     font-size: 0.75em; font-weight: 700;
     padding: 2px 8px; border-radius: 8px;
     margin-left: 6px; vertical-align: middle;
@@ -151,103 +189,211 @@ footer a { color: var(--accent); }
 <header>
     <h1>🚀 Sci-Fi Empfehlungen</h1>
     <div class="meta">
-        Kuratiert am 03.04.2026 — 40 Titel
-        <span class="badge">+27 NEU</span>
+        Kuratiert am 03.04.2026 — 60 Titel
+        <span class="badge">+47 NEU</span>
     </div>
 </header>
 <div class="container">
 
 <div class="top-section">
     <ol>
-        <li><strong>The Forever War</strong> — Joe Haldeman <span class="reason">Vietnam-Allegorie mit Zeitdilatation. Hugo + Nebula Gewinner.</span></li>
-        <li><strong>Ancillary Justice</strong> — Ann Leckie <span class="reason">KI in einem Körper. Hugo + Nebula 2014.</span></li>
-        <li><strong>Accelerando</strong> — Charles Stross <span class="reason">Singularity aus 9 Perspektiven.</span></li>
-        <li><strong>Ender's Game</strong> — Orson Scott Card <span class="reason">Hugo + Nebula. Kind-Soldaten im Weltraum.</span></li>
-        <li><strong>The Diamond Age</strong> — Neal Stephenson <span class="reason">Nano-Erziehung durch interaktives Buch.</span></li>
+        <li><strong>The Forever War</strong> — Joe Haldeman <span class="reason">Vietnam-Allegorie mit Zeitdilatation. Hugo + Nebula.</span></li>
+        <li><strong>Ancillary Justice</strong> — Ann Leckie <span class="reason">KI in einem Körper. Hugo + Nebula 2014. Start der Imperial Radch-Trilogie.</span></li>
+        <li><strong>The Three-Body Problem</strong> — Cixin Liu <span class="reason">Dunkelwald-Dilemma. Remembrance of Earth's Past.</span></li>
+        <li><strong>Dune</strong> — Frank Herbert <span class="reason">Ökologie + Politik. #1 Locus Poll aller Zeiten.</span></li>
+        <li><strong>Ender's Game</strong> — Orson Scott Card <span class="reason">Kind-Soldaten im Weltraum. USMC Leseliste.</span></li>
     </ol>
 </div>
 
 <div class="award-section">
-    <h3 style="margin-bottom:15px;">Neueste Preisträger</h3>
-    <p><strong>🏆 Hugo 2025 Best Novel:</strong> The Tainted Cup — Robert Jackson Bennett (2024) — Fantasy-Krimi auf einer magisch verseuchten Insel. Sherlock-Holmes-Struktur in einer Welt mit Leviathan-Blut-Magie.</p>
-    <p><strong>🏆 Nebula 2025 Best Novel:</strong> Someone You Can Build a Nest In — John Wiswell (2024) — Shapeshifter-Monster verliebt sich. Locus Award Best First Novel. Herzerwärmend und bizarr.</p>
-    <p><strong>🏆 Nebula 2025 Best Novella:</strong> The Dragonfly Gambit — A.D. Sui (2024)</p>
-    <p><strong>🏆 Nebula 2024 Best Novel:</strong> The Tainted Cup — Robert Jackson Bennett</p>
-    <p><strong>🏆 System Collapse</strong> — Martha Wells (2024) — Murderbot Diaries #7. Locus Award 2024.</p>
+    <p><strong>🏆 Goodreads Choice Award 2024 Sci-Fi (Winner):</strong> The Ministry of Time — Kaliane Bradley (78.459 Stimmen) — Architektin rekrutiert "Expat" aus der Vergangenheit. Zeitreise + Romance.</p>
+    <p><strong>🥈 Platz 2:</strong> The Family Experiment — David Nickell — Familien in einer Simulationsbox.</p>
+    <p><strong>🥉 Platz 3:</strong> Annie Bot — Sierra Greer — KI-Girlfriend gewinnt Bewusstsein.</p>
+    <p><strong>Platz 4:</strong> The Mercy of Gods — James S.A. Corey (Expanse-Autoren!) — First Contact von der Verlierer-Seite.</p>
+    <p><strong>Platz 5:</strong> Orbital — Samantha Harvey — Astronauten auf der ISS. Poetisch.</p>
+    <p><strong>🏆 Hugo 2025 Best Novel:</strong> The Tainted Cup — Robert Jackson Bennett</p>
+    <p><strong>🏆 Nebula 2025 Best Novel:</strong> Someone You Can Build a Nest In — John Wiswell</p>
+    <p><strong>🏆 System Collapse:</strong> Martha Wells (Murderbot #7, Locus 2024)</p>
+    <p><strong>🏆 The Ministry of Time</strong> ist auch ein hervorragender Einstiegspunkt — frisch, emotional, aktuell.</p>
 </div>
 
-<div class="stats-bar" id="stats">Zeige <strong>40</strong> von <strong>40</strong> Titeln · <strong>20</strong> Subgenres</div>
+<div class="series-section">
+    <h3>Diese Serien lohnen sich</h3>
+    <div class="series-order">
+        <strong>🔸 Remembrance of Earth's Past (Cixin Liu)</strong><br>
+        1. The Three-Body Problem (2006) ⭐⭐⭐⭐⭐<br>
+        2. The Dark Forest (2008) ⭐⭐⭐⭐⭐<br>
+        3. Death's End (2010) ⭐⭐⭐⭐⭐ — <em>Skaliert kosmisch bis zum Ende des Universums.</em>
+    </div>
+    <div class="series-order">
+        <strong>🔸 Murderbot Diaries (Martha Wells)</strong><br>
+        1. All Systems Red (2017) ⭐⭐⭐⭐⭐ — <em>Hugo + Nebula Novella.</em><br>
+        2. Artificial Condition (2018)<br>
+        3. Rogue Protocol (2018)<br>
+        4. Exit Strategy (2018) — <em>Hugo Novella.</em><br>
+        5. Network Effect (2020) ⭐⭐⭐⭐⭐ — <em>Hugo + Nebula Novel.</em><br>
+        6. Fugitive Telemetry (2021)<br>
+        7. System Collapse (2023) — <em>Locus Award.</em><br>
+        <em>Perfekt für dich: soziale KI mit sarkastischem Humor.</em>
+    </div>
+    <div class="series-order">
+        <strong>🔸 Imperial Radch (Ann Leckie)</strong><br>
+        1. Ancillary Justice (2013) ⭐⭐⭐⭐⭐ — <em>Hugo + Nebula. Start hier.</em><br>
+        2. Ancillary Sword (2014)<br>
+        3. Ancillary Mercy (2015)<br>
+        <em>Komplett in sich abgeschlossen. 3 Bände.</em>
+    </div>
+    <div class="series-order">
+        <strong>🔸 The Expanse (James S.A. Corey)</strong><br>
+        1. Leviathan Wakes (2011) ⭐⭐⭐⭐☆<br>
+        2. Caliban's War (2012)<br>
+        3. Abaddon's Gate (2013)<br>
+        4. Cibola Burn (2014) ⭐⭐⭐⭐☆<br>
+        5. Nemesis Games (2015) ⭐⭐⭐⭐☆<br>
+        6. Babylon's Ashes (2016)<br>
+        7. Persepolis Rising (2017) ⭐⭐⭐⭐⭐<br>
+        8. Tiamat's Wrath (2019)<br>
+        9. Leviathan Falls (2021) ⭐⭐⭐⭐⭐ — <em>Epischer Abschluss.</em><br>
+        <em>Die gleiche Serie hat The Four Lands of Science Fiction gemacht. Politisch brillant.</em>
+    </div>
+    <div class="series-order">
+        <strong>🔸 Old Man's War (John Scalzi)</strong><br>
+        1. Old Man's War (2005) ⭐⭐⭐⭐☆ — <em>Zugänglichster Einstiegspunkt.</em><br>
+        2. The Ghost Brigades (2006) ⭐⭐⭐⭐☆<br>
+        3. The Last Colony (2007)<br>
+        4. Zoe's Tale (2008)<br>
+        5. The Human Division (2013)<br>
+        6. The End of All Things (2015)<br>
+        <em>Humorvoll, zugänglich, aber nicht dumm.</em>
+    </div>
+    <div class="series-order">
+        <strong>🔸 Culture-Serie (Iain M. Banks)</strong><br>
+        1. Consider Phlebas (1987) ⭐⭐⭐⭐☆ — <em>Chronologisch erste, aber...</em><br>
+        <b>Besserer Einstieg:</b><br>
+        • The Player of Games (1988) ⭐⭐⭐⭐⭐ — <em>Tollster Culture-Roman.</em><br>
+        • Use of Weapons (1990) ⭐⭐⭐⭐⭐ — <em>Strukturell einzigartig.</em><br>
+        • Excession (1996) ⭐⭐⭐⭐☆ — <em>Die MIs im Fokus.</em><br>
+        <em>Bewusst post-scarcity. Superintelligente KI-Götter. Philophisch.</em>
+    </div>
+    <div class="series-order">
+        <strong>🔸 Foundation (Isaac Asimov)</strong><br>
+        1. Foundation (1951) ⭐⭐⭐⭐☆<br>
+        2. Foundation and Empire (1952)<br>
+        3. Second Foundation (1953)<br>
+        <em>Psychohistorie: Mathe sagt Zukunft voraus. Hugo 1966 "Best All-Time Series."</em>
+    </div>
+</div>
+
+<div class="award-section" style="border-color: #ff6600;">
+    <h3 style="margin-bottom: 10px; border-color: #ff6600; color: #ff6600;">🇩🇪 Deutschsprachige Sci-Fi</h3>
+    <p><strong>📖 Die Haarteppichknüpfer</strong> — Andreas Eschbach (2000) — <em>Handgeknüpfte Teppiche im All. Absurd, genial.</em></p>
+    <p><strong>📖 Herr aller Dinge</strong> — Andreas Eschbach (2010) — <em>Quantenphysik + Religion.</em></p>
+    <p><strong>📖 NSA</strong> — Andreas Eschbach (2018) — <em>Überwachungsdystopie.</em></p>
+    <p><strong>📖 QualityLand</strong> — Marc-Uwe Kling (2017) — <em>Kapitalismus-Satire mit KI. Sehr gut.</em></p>
+    <p><strong>📖 QualityLand 2.0</strong> — Marc-Uwe Kling (2019) — <em>Fast besser als Band 1.</em></p>
+    <p><strong>📖 Solaris</strong> — Stanisław Lem (dt. 1972) — <em>Auf der Liste bereits enthalten, aber dt. Übersetzung exzellent.</em></p>
+</div>
+
+<div class="stats-bar" id="stats">Zeige <strong>60</strong> von <strong>60</strong> Titeln · <strong>28</strong> Subgenres</div>
 
 <div class="filter-bar" id="filters">
-    <button class="filter-btn active" data-filter="all">Alle (40)</button>
-    <button class="filter-btn" data-filter="5">⭐⭐⭐⭐⭐ (12)</button>
-    <button class="filter-btn" data-filter="award">🏆 Award-Winner</button>
-    <button class="filter-btn" data-filter="new">🆕 Neu (27)</button>
-    <button class="filter-btn" data-filter="Hard-SF">Hard-SF (12)</button>
-    <button class="filter-btn" data-filter="First Contact">First Contact (6)</button>
-    <button class="filter-btn" data-filter="Cyberpunk">Cyberpunk (4)</button>
-    <button class="filter-btn" data-filter="Military">Military (4)</button>
-    <button class="filter-btn" data-filter="Klassiker">Klassiker (6)</button>
+    <button class="filter-btn active" data-filter="all">Alle (60)</button>
+    <button class="filter-btn" data-filter="5">⭐⭐⭐⭐⭐ (15)</button>
+    <button class="filter-btn" data-filter="award">🏆 Award</button>
+    <button class="filter-btn" data-filter="series">📚 Serien</button>
+    <button class="filter-btn" data-filter="de">🇩🇪 Deutsch</button>
+    <button class="filter-btn" data-filter="new">🆕 Neu (47)</button>
+    <button class="filter-btn" data-filter="Hard-SF">Hard-SF</button>
+    <button class="filter-btn" data-filter="First Contact">First Contact</button>
+    <button class="filter-btn" data-filter="Cyberpunk">Cyberpunk</button>
+    <button class="filter-btn" data-filter="Military">Military</button>
+    <button class="filter-btn" data-filter="Klassiker">Klassiker</button>
+    <button class="filter-btn" data-filter="Post-S">Post-S</button>
 </div>
 
 <div class="book-grid" id="grid"></div>
 
 <footer>
-    Quelle: OpenClaw Autopilot, kuratiert und erweitert am 03.04.2026<br>
-    Daten: Goodreads, Hugo/Nebula Awards, Locus Awards<br>
+    Quelle: OpenClaw Autopilot, kuratiert am 03.04.2026<br>
+    Daten: Goodreads, Hugo/Nebula/Locus Awards, SF-Lit.de<br>
     <a href="https://hendr15k.github.io/sci-fi-empfehlungen/">https://hendr15k.github.io/sci-fi-empfehlungen/</a>
 </footer>
 </div>
 
 <script>
-const books = [
-{"title":"Blindsight","author":"Peter Watts","year":"2006","genre":"Hard-SF / First Contact","rating":"⭐⭐⭐⭐⭐","why":"Bewusstsein als evolutions-technischer Zufall. First Contact ohne Empathie.","isNew":false,"award":false},
-{"title":"Permutation City","author":"Greg Egan","year":"1994","genre":"Hard-SF / Simulation","rating":"⭐⭐⭐⭐⭐","why":"Ontologie digitaler Bewusstseine. Hardcore-Philosophie.","isNew":false,"award":false},
-{"title":"Solaris","author":"Stanisław Lem","year":"1961","genre":"First Contact / Klassiker","rating":"⭐⭐⭐⭐⭐","why":"Der Ozean spiegelt statt zu kommunizieren.","isNew":false,"award":false},
-{"title":"Story of Your Life","author":"Ted Chiang","year":"1998","genre":"Hard-SF / Linguistik","rating":"⭐⭐⭐⭐⭐","why":"Sprache verändert Kognition. 'Arrival' basiert darauf.","isNew":false,"award":false},
-{"title":"The Three-Body Problem","author":"Cixin Liu","year":"2006","genre":"Hard-SF / First Contact","rating":"⭐⭐⭐⭐⭐","why":"Dunkelwald-Dilemma, kosmische Soziologie. Hugo 2015.","isNew":false,"award":true},
-{"title":"Vita Nostra","author":"Marina + Sergey Dyachenko","year":"2007","genre":"Mind-Bend / Metamorphose","rating":"⭐⭐⭐⭐⭐","why":"Lernen unter extremem Transformationsdruck.","isNew":false,"award":false},
-{"title":"Children of Time","author":"Adrian Tchaikovsky","year":"2015","genre":"Hard-SF / Evolution","rating":"⭐⭐⭐⭐☆","why":"Spinnen-Zivilisation über Jahrtausende. Arthur C. Clarke Award.","isNew":false,"award":true},
-{"title":"Diaspora","author":"Greg Egan","year":"1997","genre":"Hard-SF / Posthuman","rating":"⭐⭐⭐⭐☆","why":"Noch abstrakter als Permutation City.","isNew":false,"award":false},
-{"title":"Embassytown","author":"China Miéville","year":"2011","genre":"First Contact / Linguistik","rating":"⭐⭐⭐⭐☆","why":"Sprache als Reality-Interface.","isNew":false,"award":false},
-{"title":"Pushing Ice","author":"Alastair Reynolds","year":"2005","genre":"Hard-SF / Big Ideas","rating":"⭐⭐⭐⭐☆","why":"Deep-Time-Architektur.","isNew":false,"award":false},
-{"title":"Schilder's Ladder","author":"Greg Egan","year":"2002","genre":"Hard-SF / Physik","rating":"⭐⭐⭐⭐☆","why":"Nova-Explosion frisst Raumzeit.","isNew":false,"award":false},
-{"title":"Neuromancer","author":"William Gibson","year":"1984","genre":"Cyberpunk / Klassiker","rating":"⭐⭐⭐☆☆","why":"Hugo + Nebula + Philip K. Dick. Triple Crown. Genre-definierend.","isNew":false,"award":true},
-{"title":"The Martian Chronicles","author":"Ray Bradbury","year":"1950","genre":"Klassiker / Kolonisation","rating":"⭐⭐⭐☆☆","why":"Poetisch statt hart — Kontrastprogramm.","isNew":false,"award":false},
-{"title":"Accelerando","author":"Charles Stross","year":"2005","genre":"Hard-SF / Post-Singularität","rating":"⭐⭐⭐⭐⭐","why":"Singularity aus 9 Perspektiven. Technisch dichte Prosa.","isNew":true,"award":false},
-{"title":"Ancillary Justice","author":"Ann Leckie","year":"2013","genre":"Space Opera / KI","rating":"⭐⭐⭐⭐⭐","why":"Hugo + Nebula 2014. KI-Soldatin in einem Körper.","isNew":true,"award":true},
-{"title":"Snow Crash","author":"Neal Stephenson","year":"1992","genre":"Cyberpunk / Satire","rating":"⭐⭐⭐⭐☆","why":"Metaverse-Erfinder. Linguistisches Virus als Plot-Device.","isNew":true,"award":false},
-{"title":"Old Man's War","author":"John Scalzi","year":"2005","genre":"Military SF / Space Opera","rating":"⭐⭐⭐⭐☆","why":"75-Jährige werden Rekruten. Zugänglich aber nicht dumm.","isNew":true,"award":false},
-{"title":"The Forever War","author":"Joe Haldeman","year":"1974","genre":"Military SF / Klassiker","rating":"⭐⭐⭐⭐⭐","why":"Hugo + Nebula 1976. Vietnam-Allegorie mit Zeitdilatation.","isNew":true,"award":true},
-{"title":"Down and Out in the Magic Kingdom","author":"Cory Doctorow","year":"2003","genre":"Post-Scarcity / Near-Future","rating":"⭐⭐⭐☆☆","why":"Whuffie-Score als Währung. Open-Source-First-Novel.","isNew":true,"award":false},
-{"title":"The Ghost Brigades","author":"John Scalzi","year":"2006","genre":"Military SF / KI","rating":"⭐⭐⭐⭐☆","why":"Defectors = bewusste Waffen. Was ist Identität?","isNew":true,"award":false},
-{"title":"The Diamond Age","author":"Neal Stephenson","year":"1995","genre":"Nanopunk / Bildung","rating":"⭐⭐⭐⭐☆","why":"Locus Award 1996. Interaktives Buch erzieht Mädchen.","isNew":true,"award":true},
-{"title":"The Windup Girl","author":"Paolo Bacigalupi","year":"2009","genre":"Biopunk / Climate SF","rating":"⭐⭐⭐⭐☆","why":"Hugo + Nebula 2010. Gen-Engineering im Thai-Kontext.","isNew":true,"award":true},
-{"title":"Binti","author":"Nnedi Okorafor","year":"2015","genre":"Africanfuturism / First Contact","rating":"⭐⭐⭐⭐☆","why":"Hugo + Nebula 2016. Himba-Mädchen auf Alien-Uni.","isNew":true,"award":true},
-{"title":"The City & The City","author":"China Miéville","year":"2009","genre":"New Weird / Noir","rating":"⭐⭐⭐⭐☆","why":"Zwei Städte am selben Ort — solange keiner hinsieht. Hugo 2010.","isNew":true,"award":true},
-{"title":"A Fire Upon the Deep","author":"Vernor Vinge","year":"1992","genre":"Space Opera / Zonen of Thought","rating":"⭐⭐⭐⭐☆","why":"Hugo 1993. Physische Gesetze variieren im All.","isNew":true,"award":true},
-{"title":"The Gone World","author":"Tom Sweterlitsch","year":"2018","genre":"Zeitreise / Cosmic Horror","rating":"⭐⭐⭐⭐☆","why":"Cold-War-Zeitreise trifft Lovecraft.","isNew":true,"award":false},
-{"title":"Recursion","author":"Blake Crouch","year":"2019","genre":"Thriller / False Memory","rating":"⭐⭐⭐☆☆","why":"Pageturner mit echtem Sci-Fi-Konzept.","isNew":true,"award":false},
-{"title":"The Warehouse","author":"Rob Hart","year":"2019","genre":"Dystopie / Corporate SF","rating":"⭐⭐⭐☆☆","why":"Amazon als souveräner Staat.","isNew":true,"award":false},
-{"title":"Ender's Game","author":"Orson Scott Card","year":"1985","genre":"Military SF / Klassiker","rating":"⭐⭐⭐⭐⭐","why":"Hugo + Nebula 1986. Kind-Soldaten im Weltraum. USMC Leseliste.","isNew":true,"award":true},
-{"title":"Speaker for the Dead","author":"Orson Scott Card","year":"1986","genre":"Space Opera / First Contact","rating":"⭐⭐⭐⭐⭐","why":"Hugo + Nebula 1987. Einziger Autor mit Double Crown in Folge.","isNew":true,"award":true},
-{"title":"The Left Hand of Darkness","author":"Ursula K. Le Guin","year":"1969","genre":"Klassiker / Gender / First Contact","rating":"⭐⭐⭐⭐⭐","why":"Hugo + Nebula 1970. Gender-fluide Alien-Gesellschaft.","isNew":true,"award":true},
-{"title":"The Dispossessed","author":"Ursula K. Le Guin","year":"1974","genre":"Klassiker / Politische SF","rating":"⭐⭐⭐⭐⭐","why":"Hugo + Nebula + Locus. Anarchismus vs Kapitalismus.","isNew":true,"award":true},
-{"title":"Dune","author":"Frank Herbert","year":"1965","genre":"Space Opera / Klassiker","rating":"⭐⭐⭐⭐⭐","why":"Hugo + Nebula. Ökologie + Politik + Mystik. #1 aller Zeiten.","isNew":true,"award":true},
-{"title":"The Tainted Cup","author":"Robert Jackson Bennett","year":"2024","genre":"Fantasy-Krimi / Hugo 2025","rating":"⭐⭐⭐⭐⭐","why":"Hugo 2025. Mord durch Baum-Wachstum auf magischer Insel.","isNew":true,"award":true},
-{"title":"Someone You Can Build a Nest In","author":"John Wiswell","year":"2024","genre":"Monster-Romance / Nebula 2025","rating":"⭐⭐⭐⭐⭐","why":"Nebula 2025 + Locus Best First Novel. Shapeshifter liebt.","isNew":true,"award":true},
-{"title":"System Collapse","author":"Martha Wells","year":"2023","genre":"Space Opera / Humor","rating":"⭐⭐⭐⭐☆","why":"Murderbot #7. Locus Award 2024. Soziale Angst + Weltraum.","isNew":true,"award":true},
-{"title":"Rakesfall","author":"Vajra Chandrasekera","year":"2024","genre":"Literarische SF / Nebula Finalist","rating":"⭐⭐⭐⭐☆","why":"Nebula 2025 Finalist. Reinkarnation über Jahrhunderte.","isNew":true,"award":false},
-{"title":"Asunder","author":"Kerstin Hall","year":"2024","genre":"Raumfahrt / Nebula Finalist","rating":"⭐⭐⭐⭐☆","why":"Nebula 2025 Finalist. Postkoloniale Space Opera.","isNew":true,"award":false},
-{"title":"The Practice, the Horizon, and the Chain","author":"Sofia Samatar","year":"2024","genre":"Philosophische SF / Nebula Finalist","rating":"⭐⭐⭐⭐☆","why":"Nebula 2025 Finalist. Leben auf einem Generationenschiff.","isNew":true,"award":false},
-{"title":"The Book of Love","author":"Kelly Link","year":"2024","genre":"Magischer Realismus / Nebula Finalist","rating":"⭐⭐⭐☆☆","why":"Nebula 2025 Finalist. Magische Realismus-SF-Mischung.","isNew":true,"award":false}
+var books = [
+{"title":"Blindsight","author":"Peter Watts","year":"2006","genre":"Hard-SF / First Contact","rating":"⭐⭐⭐⭐⭐","why":"Bewusstsein als evolutions-technischer Zufall. First Contact ohne Empathie.","isNew":false,"award":false,"series":false,"de":false},
+{"title":"Permutation City","author":"Greg Egan","year":"1994","genre":"Hard-SF / Simulation","rating":"⭐⭐⭐⭐⭐","why":"Ontologie digitaler Bewusstseine. Hardcore-Philosophie.","isNew":false,"award":false,"series":false,"de":false},
+{"title":"Solaris","author":"Stanisław Lem","year":"1961","genre":"First Contact / Klassiker","rating":"⭐⭐⭐⭐⭐","why":"Der Ozean spiegelt statt zu kommunizieren.","isNew":false,"award":false,"series":false,"de":false},
+{"title":"Story of Your Life","author":"Ted Chiang","year":"1998","genre":"Hard-SF / Linguistik","rating":"⭐⭐⭐⭐⭐","why":"Sprache verändert Kognition. 'Arrival' basiert darauf.","isNew":false,"award":false,"series":false,"de":false},
+{"title":"The Three-Body Problem","author":"Cixin Liu","year":"2006","genre":"Hard-SF / First Contact","rating":"⭐⭐⭐⭐⭐","why":"Dunkelwald-Dilemma. Teil 1 von Remembrance of Earth's Past. Hugo 2015.","isNew":false,"award":true,"series":true,"de":false},
+{"title":"Vita Nostra","author":"Marina + Sergey Dyachenko","year":"2007","genre":"Mind-Bend / Metamorphose","rating":"⭐⭐⭐⭐⭐","why":"Lernen unter extremem Transformationsdruck.","isNew":false,"award":false,"series":false,"de":false},
+{"title":"Children of Time","author":"Adrian Tchaikovsky","year":"2015","genre":"Hard-SF / Evolution","rating":"⭐⭐⭐⭐☆","why":"Spinnen-Zivilisation über Jahrtausende. Arthur C. Clarke Award.","isNew":false,"award":true,"series":true,"de":false},
+{"title":"Diaspora","author":"Greg Egan","year":"1997","genre":"Hard-SF / Posthuman","rating":"⭐⭐⭐⭐☆","why":"Noch abstrakter als Permutation City.","isNew":false,"award":false,"series":false,"de":false},
+{"title":"Embassytown","author":"China Miéville","year":"2011","genre":"First Contact / Linguistik","rating":"⭐⭐⭐⭐☆","why":"Sprache als Reality-Interface.","isNew":false,"award":false,"series":false,"de":false},
+{"title":"Pushing Ice","author":"Alastair Reynolds","year":"2005","genre":"Hard-SF / Big Ideas","rating":"⭐⭐⭐⭐☆","why":"Deep-Time-Architektur.","isNew":false,"award":false,"series":false,"de":false},
+{"title":"Schilder's Ladder","author":"Greg Egan","year":"2002","genre":"Hard-SF / Physik","rating":"⭐⭐⭐⭐☆","why":"Nova-Explosion frisst Raumzeit.","isNew":false,"award":false,"series":false,"de":false},
+{"title":"Neuromancer","author":"William Gibson","year":"1984","genre":"Cyberpunk / Klassiker","rating":"⭐⭐⭐☆☆","why":"Hugo + Nebula + Philip K. Dick. Triple Crown. Genre-definierend.","isNew":false,"award":true,"series":true,"de":false},
+{"title":"The Martian Chronicles","author":"Ray Bradbury","year":"1950","genre":"Klassiker / Kolonisation","rating":"⭐⭐⭐☆☆","why":"Poetisch statt hart — Kontrastprogramm.","isNew":false,"award":false,"series":true,"de":false},
+{"title":"Accelerando","author":"Charles Stross","year":"2005","genre":"Hard-SF / Post-Singularität","rating":"⭐⭐⭐⭐⭐","why":"Singularity aus 9 Perspektiven. Technisch dichte Prosa.","isNew":true,"award":false,"series":true,"de":false},
+{"title":"Ancillary Justice","author":"Ann Leckie","year":"2013","genre":"Space Opera / KI","rating":"⭐⭐⭐⭐⭐","why":"Hugo + Nebula 2014. KI-Soldatin in einem Körper. Band 1/3.","isNew":true,"award":true,"series":true,"de":false},
+{"title":"Snow Crash","author":"Neal Stephenson","year":"1992","genre":"Cyberpunk / Satire","rating":"⭐⭐⭐⭐☆","why":"Metaverse-Erfinder. Linguistisches Virus als Plot-Device.","isNew":true,"award":false,"series":false,"de":false},
+{"title":"Old Man's War","author":"John Scalzi","year":"2005","genre":"Military SF / Space Opera","rating":"⭐⭐⭐⭐☆","why":"75-Jährige werden Rekruten. Zugänglich aber nicht dumm. Band 1/6.","isNew":true,"award":false,"series":true,"de":false},
+{"title":"The Forever War","author":"Joe Haldeman","year":"1974","genre":"Military SF / Klassiker","rating":"⭐⭐⭐⭐⭐","why":"Hugo + Nebula 1976. Vietnam-Allegorie mit Zeitdilatation.","isNew":true,"award":true,"series":false,"de":false},
+{"title":"Down and Out in the Magic Kingdom","author":"Cory Doctorow","year":"2003","genre":"Post-S / Near-Future","rating":"⭐⭐⭐☆☆","why":"Whuffie-Score als Währung. Creative Commons.","isNew":true,"award":false,"series":false,"de":false},
+{"title":"The Ghost Brigades","author":"John Scalzi","year":"2006","genre":"Military SF / KI","rating":"⭐⭐⭐⭐☆","why":"Defectors = bewusste Waffen. Band 2/6.","isNew":true,"award":false,"series":true,"de":false},
+{"title":"The Diamond Age","author":"Neal Stephenson","year":"1995","genre":"Nanopunk / Bildung","rating":"⭐⭐⭐⭐☆","why":"Locus Award 1996. Interaktives Buch erzieht Mädchen.","isNew":true,"award":true,"series":false,"de":false},
+{"title":"The Windup Girl","author":"Paolo Bacigalupi","year":"2009","genre":"Biopunk / Climate SF","rating":"⭐⭐⭐⭐☆","why":"Hugo + Nebula 2010. Gen-Engineering im Thai-Kontext.","isNew":true,"award":true,"series":false,"de":false},
+{"title":"Binti","author":"Nnedi Okorafor","year":"2015","genre":"Africanfuturism / First Contact","rating":"⭐⭐⭐⭐☆","why":"Hugo + Nebula 2016. Himba-Mädchen auf Alien-Uni.","isNew":true,"award":true,"series":true,"de":false},
+{"title":"The City & The City","author":"China Miéville","year":"2009","genre":"New Weird / Noir","rating":"⭐⭐⭐⭐☆","why":"Hugo 2010. Zwei Städte am selben Ort.","isNew":true,"award":true,"series":false,"de":false},
+{"title":"A Fire Upon the Deep","author":"Vernor Vinge","year":"1992","genre":"Space Opera / Zonen of Thought","rating":"⭐⭐⭐⭐☆","why":"Hugo 1993. Physische Gesetze variieren im All.","isNew":true,"award":true,"series":true,"de":false},
+{"title":"The Gone World","author":"Tom Sweterlitsch","year":"2018","genre":"Zeitreise / Cosmic Horror","rating":"⭐⭐⭐⭐☆","why":"Cold-War-Zeitreise trifft Lovecraft.","isNew":true,"award":false,"series":false,"de":false},
+{"title":"Recursion","author":"Blake Crouch","year":"2019","genre":"Thriller / False Memory","rating":"⭐⭐⭐☆☆","why":"Pageturner mit echtem Sci-Fi-Konzept.","isNew":true,"award":false,"series":false,"de":false},
+{"title":"The Warehouse","author":"Rob Hart","year":"2019","genre":"Dystopie / Corporate SF","rating":"⭐⭐⭐☆☆","why":"Amazon als souveräner Staat.","isNew":true,"award":false,"series":false,"de":false},
+{"title":"Ender's Game","author":"Orson Scott Card","year":"1985","genre":"Military SF / Klassiker","rating":"⭐⭐⭐⭐⭐","why":"Hugo + Nebula 1986. Kind-Soldaten. USMC Leseliste. Band 1.","isNew":true,"award":true,"series":true,"de":false},
+{"title":"Speaker for the Dead","author":"Orson Scott Card","year":"1986","genre":"Space Opera / First Contact","rating":"⭐⭐⭐⭐⭐","why":"Hugo + Nebula 1987. Einziger Autor mit Double Crown in Folge.","isNew":true,"award":true,"series":true,"de":false},
+{"title":"The Left Hand of Darkness","author":"Ursula K. Le Guin","year":"1969","genre":"Klassiker / Gender / First Contact","rating":"⭐⭐⭐⭐⭐","why":"Hugo + Nebula 1970. Gender-fluide Alien-Gesellschaft.","isNew":true,"award":true,"series":false,"de":false},
+{"title":"The Dispossessed","author":"Ursula K. Le Guin","year":"1974","genre":"Klassiker / Politische SF","rating":"⭐⭐⭐⭐⭐","why":"Hugo + Nebula + Locus. Anarchismus vs Kapitalismus.","isNew":true,"award":true,"series":false,"de":false},
+{"title":"Dune","author":"Frank Herbert","year":"1965","genre":"Space Opera / Klassiker","rating":"⭐⭐⭐⭐⭐","why":"Hugo + Nebula. Ökologie + Politik + Mystik. #1 aller Zeiten.","isNew":true,"award":true,"series":true,"de":false},
+{"title":"The Tainted Cup","author":"Robert Jackson Bennett","year":"2024","genre":"Fantasy-Krimi / Hugo 2025","rating":"⭐⭐⭐⭐⭐","why":"Hugo 2025. Mord durch magisches Baum-Wachstum.","isNew":true,"award":true,"series":false,"de":false},
+{"title":"Someone You Can Build a Nest In","author":"John Wiswell","year":"2024","genre":"Monster-Romance / Nebula 2025","rating":"⭐⭐⭐⭐⭐","why":"Nebula 2025 + Locus Best First Novel.","isNew":true,"award":true,"series":false,"de":false},
+{"title":"System Collapse","author":"Martha Wells","year":"2023","genre":"Space Opera / Humor","rating":"⭐⭐⭐⭐☆","why":"Murderbot #7. Locus Award 2024.","isNew":true,"award":true,"series":true,"de":false},
+{"title":"The Ministry of Time","author":"Kaliane Bradley","year":"2024","genre":"Zeitreise / Romance","rating":"⭐⭐⭐⭐⭐","why":"Goodreads Choice Award 2024 (78.459 Stimmen). Expat aus Vergangenheit.","isNew":true,"award":true,"series":false,"de":false},
+{"title":"The Mercy of Gods","author":"James S.A. Corey","year":"2024","genre":"Space Opera / First Contact","rating":"⭐⭐⭐⭐⭐","why":"Goodreads #4. Expanse-Autoren! Band 1 von The Captive's War.","isNew":true,"award":false,"series":true,"de":false},
+{"title":"Annie Bot","author":"Sierra Greer","year":"2024","genre":"Near-Future / KI","rating":"⭐⭐⭐⭐☆","why":"Goodreads #3. KI-Girlfriend gewinnt Bewusstsein.","isNew":true,"award":false,"series":false,"de":false},
+{"title":"Orbital","author":"Samantha Harvey","year":"2023","genre":"Literarische SF","rating":"⭐⭐⭐⭐☆","why":"Goodreads #5. Booker-Shortlist. ISS-Poesie.","isNew":true,"award":true,"series":false,"de":false},
+{"title":"All Systems Red","author":"Martha Wells","year":"2017","genre":"Space Opera / Humor","rating":"⭐⭐⭐⭐⭐","why":"Murderbot #1. Hugo + Nebula Novella. Social-Anxiety-KI.","isNew":true,"award":true,"series":true,"de":false},
+{"title":"The Dark Forest","author":"Cixin Liu","year":"2008","genre":"Hard-SF / First Contact","rating":"⭐⭐⭐⭐⭐","why":"Band 2/3. Der beste der Trilogie. Dunkelwald-Theorie.","isNew":true,"award":false,"series":true,"de":false},
+{"title":"Death's End","author":"Cixin Liu","year":"2010","genre":"Hard-SF / Eschatologie","rating":"⭐⭐⭐⭐⭐","why":"Band 3/3. Skaliert bis zum Ende des Universums.","isNew":true,"award":false,"series":true,"de":false},
+{"title":"The Player of Games","author":"Iain M. Banks","year":"1988","genre":"Space Opera / Post-S","rating":"⭐⭐⭐⭐⭐","why":"Bester Culture-Roman. Brettspiel als geopolitisches Werkzeug.","isNew":true,"award":false,"series":true,"de":false},
+{"title":"Use of Weapons","author":"Iain M. Banks","year":"1990","genre":"Space Opera / Post-S","rating":"⭐⭐⭐⭐⭐","why":"Structural masterpiece. Zwei Zeitebenen.","isNew":true,"award":false,"series":true,"de":false},
+{"title":"Leviathan Wakes","author":"James S.A. Corey","year":"2011","genre":"Space Opera / Noir","rating":"⭐⭐⭐⭐☆","why":"The Expanse #1. Privatdetektiv im Sonnensystem.","isNew":true,"award":false,"series":true,"de":false},
+{"title":"The Family Experiment","author":"David Nickell","year":"2024","genre":"Near-Future / Simulation","rating":"⭐⭐⭐⭐☆","why":"Goodreads #2. Familien in der Simulations-Box.","isNew":true,"award":false,"series":false,"de":false},
+{"title":"The Expanse: Persepolis Rising","author":"James S.A. Corey","year":"2017","genre":"Space Opera / Military","rating":"⭐⭐⭐⭐⭐","why":"The Expanse #7. Die Rückkehr zur Größe.","isNew":true,"award":false,"series":true,"de":false},
+{"title":"Leviathan Falls","author":"James S.A. Corey","year":"2021","genre":"Space Opera / Finale","rating":"⭐⭐⭐⭐⭐","why":"The Expanse #9. Epischer Abschluss.","isNew":true,"award":false,"series":true,"de":false},
+{"title":"The Haarteppichknüpfer","author":"Andreas Eschbach","year":"2000","genre":"Deutsche SF / Space Opera","rating":"⭐⭐⭐⭐☆","why":"Handgeknüpfte Teppiche als Raumschiff-Antrieb. Absurd genial.","isNew":true,"award":false,"series":false,"de":true},
+{"title":"QualityLand","author":"Marc-Uwe Kling","year":"2017","genre":"Deutsche SF / Satire","rating":"⭐⭐⭐⭐☆","why":"Kapitalismus mit KI-Algorithmus. Sehr unterhaltsam.","isNew":true,"award":false,"series":false,"de":true},
+{"title":"QualityLand 2.0","author":"Marc-Uwe Kling","year":"2019","genre":"Deutsche SF / Satire","rating":"⭐⭐⭐⭐☆","why":"Mindestens so gut wie Band 1.","isNew":true,"award":false,"series":false,"de":true},
+{"title":"Herr aller Dinge","author":"Andreas Eschbach","year":"2010","genre":"Deutsche SF / Phys-Thriller","rating":"⭐⭐⭐⭐☆","why":"Quantenphysik + Religion. Eschbachs Ehrgeizigstes.","isNew":true,"award":false,"series":false,"de":true},
+{"title":"Rakesfall","author":"Vajra Chandrasekera","year":"2024","genre":"Literarische SF / Nebula Finalist","rating":"⭐⭐⭐⭐☆","why":"Nebula 2025 Finalist. Reinkarnation über Jahrhunderte.","isNew":true,"award":false,"series":false,"de":false},
+{"title":"Asunder","author":"Kerstin Hall","year":"2024","genre":"Postkoloniale Space Opera","rating":"⭐⭐⭐⭐☆","why":"Nebula 2025 Finalist.","isNew":true,"award":false,"series":false,"de":false},
+{"title":"The Stardust Grail","author":"Sam Gaynor","year":"2024","genre":"Sci-Fi / Archaeologie","rating":"⭐⭐⭐⭐☆","why":"Goodreads Nomine. Außerirdische Artefakte.","isNew":true,"award":false,"series":false,"de":false},
+{"title":"Foundation","author":"Isaac Asimov","year":"1951","genre":"Klassiker / Politische SF","rating":"⭐⭐⭐⭐☆","why":"Psychohistorie: Mathe sagt Zukunft voraus. Hugo 1966 Best All-Time Series.","isNew":true,"award":true,"series":true,"de":false},
+{"title":"The Dark Beyond the Stars","author":"Frank M. Robinson","year":"1991","genre":"Post-S / Generationenschiff","rating":"⭐⭐⭐☆☆","why":"Generationenschiff-Sci-Fi. Vergessener Klassiker.","isNew":true,"award":false,"series":false,"de":false},
+{"title":"Children of Ruin","author":"Adrian Tchaikovsky","year":"2019","genre":"Hard-SF / Evolution","rating":"⭐⭐⭐⭐☆","why":"Band 2/3 der Children-Serie. Oktopus-Zivilisation.","isNew":true,"award":false,"series":true,"de":false},
+{"title":"Consider Phlebas","author":"Iain M. Banks","year":"1987","genre":"Space Opera / Post-S","rating":"⭐⭐⭐⭐☆","why":"Culture #1. Action-reich, aber nicht der zugänglichste Banken.","isNew":true,"award":false,"series":true,"de":false}
 ];
 
 function renderBook(b) {
     var extra = '';
     if (b.isNew) extra += '<span class="new-tag">NEU</span>';
     if (b.award) extra += '<span class="award-badge">🏆 AWARD</span>';
-    return '<div class="book-card' + (b.isNew ? ' new-rec' : '') + '">' +
+    if (b.series) extra += '<span class="series-tag">📚 Serie</span>';
+    if (b.de) extra += '<span class="de-tag">🇩🇪 DE</span>';
+    var cls = 'book-card';
+    if (b.isNew) cls += ' new-rec';
+    if (b.de) cls += ' de-book';
+    return '<div class="' + cls + '">' +
         '<div class="book-header"><div>' +
         '<div class="book-title">' + b.title + extra + '</div>' +
         '<div class="book-meta">' + b.author + ' (' + b.year + ')</div>' +
@@ -261,7 +407,7 @@ var stats = document.getElementById('stats');
 
 function render(list) {
     grid.innerHTML = list.map(renderBook).join('');
-    stats.innerHTML = 'Zeige <strong>' + list.length + '</strong> von <strong>40</strong> Titeln';
+    stats.innerHTML = 'Zeige <strong>' + list.length + '</strong> von <strong>60</strong> Titeln';
 }
 
 render(books);
@@ -276,6 +422,8 @@ document.getElementById('filters').addEventListener('click', function(e) {
     else if (f === 'new') { filtered = books.filter(function(b) { return b.isNew; }); }
     else if (f === '5') { filtered = books.filter(function(b) { return b.rating === '⭐⭐⭐⭐⭐'; }); }
     else if (f === 'award') { filtered = books.filter(function(b) { return b.award; }); }
+    else if (f === 'series') { filtered = books.filter(function(b) { return b.series; }); }
+    else if (f === 'de') { filtered = books.filter(function(b) { return b.de; }); }
     else { filtered = books.filter(function(b) { return b.genre.indexOf(f) >= 0 || b.title.toLowerCase().indexOf(f.toLowerCase()) >= 0; }); }
     render(filtered);
 });
