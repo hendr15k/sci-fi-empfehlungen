@@ -236,7 +236,11 @@ footer a{color:var(--accent)}
 
 <div class="book-grid" id="grid"></div>
 
-<button class="reset-btn" id="resetBtn">Reading Tracker zur\u00fccksetzen</button>
+<div style="display:flex;gap:10px;justify-content:center;margin:15px 0">
+    <button class="reset-btn" id="resetBtn">Reading Tracker zurücksetzen</button>
+    <button class="reset-btn" id="exportCsvBtn" style="background:var(--accent);color:#fff">Export CSV</button>
+    <button class="reset-btn" id="exportJsonBtn" style="background:var(--accent);color:#fff">Export JSON</button>
+</div>
 
 <footer>
     Quelle: OpenClaw Autopilot, kuratiert am 4.04.2026<br>
@@ -456,12 +460,41 @@ document.getElementById('randomBtn').onclick = function() {
     el.className = 'random-result show';
 };
 
-// Reset
+// Reset + Export
+document.getElementById('exportCsvBtn').onclick = exportCSV;
+document.getElementById('exportJsonBtn').onclick = exportJSON;
+
 document.getElementById('resetBtn').onclick = function() {
     if (confirm('Alle gelesenen B\u00fccher zur\u00fccksetzen?')) {
         readState = {}; saveState(); updateProgress(); renderList();
     }
 };
+
+// Export functions
+function exportCSV() {
+    var rows = ['Titel,Autor,Jahr,Genre,Rating,Gelesen'];
+    for (var i = 0; i < books.length; i++) {
+        var b = books[i];
+        var gelesen = readState[i] ? 'Ja' : 'Nein';
+        rows.push('"' + b.title + '","' + b.author + '",' + b.year + ',"' + b.genre + '",' + b.rating + ',' + gelesen);
+    }
+    downloadFile(rows.join('\n'), 'scifi-empfehlungen-' + new Date().toISOString().slice(0, 10) + '.csv', 'text/csv');
+}
+
+function exportJSON() {
+    var data = books.map(function(b, i) {
+        return { titel: b.title, autor: b.author, jahr: b.year, genre: b.genre, rating: b.rating, gelesen: !!readState[i] };
+    });
+    downloadFile(JSON.stringify(data, null, 2), 'scifi-empfehlungen-' + new Date().toISOString().slice(0, 10) + '.json', 'application/json');
+}
+
+function downloadFile(content, filename, mimeType) {
+    var blob = new Blob([content], { type: mimeType });
+    var url = URL.createObjectURL(blob);
+    var a = document.createElement('a');
+    a.href = url; a.download = filename; a.click();
+    URL.revokeObjectURL(url);
+}
 
 renderList();
 updateProgress();
