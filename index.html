@@ -97,6 +97,13 @@ footer a{color:var(--accent)}
 
 @media(max-width:600px){header h1{font-size:1.6em}.book-card{padding:14px}.filter-btn{font-size:.78em;padding:5px 10px}.random-btn{width:100%}}
 
+/* BIG COVERS */
+.book-cover{width:140px;min-width:140px;height:210px;border-radius:12px;overflow:hidden;flex-shrink:0;box-shadow:0 4px 20px rgba(0,0,0,.3)}
+.book-cover img{width:100%;height:100%;object-fit:cover}
+.book-head{display:flex!important;align-items:flex-start;gap:20px!important;flex-wrap:nowrap}
+.book-info{flex:1;min-width:0}
+.book-card{padding:16px!important}
+@media(max-width:600px){.book-cover{width:100px;min-width:100px;height:150px}.book-head{gap:12px!important}}
 .cover-img{width:50px;height:75px;border-radius:4px;object-fit:cover;flex-shrink:0;border:1px solid var(--border);opacity:.9;transition:opacity .3s}
 .book-card:hover .cover-img{opacity:1}
 .cover-wrap{display:flex;flex-direction:column;justify-content:center;margin-top:6px}
@@ -398,7 +405,7 @@ var books = [{"title": "Blindsight", "author": "Peter Watts", "year": "2006", "g
 books[42] && (books[42].tags = "series");
 books[43] && (books[43].tags = "series");
 
-var coverMap={0:524560,1:1000639,2:12313764,3:524046,4:10526598,5:10226552,6:8264706,7:1009216,8:7276258,12:9346537,14:7355949,16:524402,17:10693768,19:524706,20:8598269,21:6463375,22:8441703,23:8455453,24:9261466,26:8748478,27:8759450,31:6979680,36:14621125,40:9157148,45:7314237,50:8596360,60:8999878,63:14631258,67:10221348,72:9295719,77:10226290,82:8665647,86:8576978,91:10282255,96:1286941,100:10477770,110:3993167,115:4531927,120:8231823,124:10496793,128:12375569,132:15138118,136:13518107};
+var coverMap={0:524560,1:1000639,2:12313764,3:524046,4:10526598,5:10226552,6:8264706,7:1009216,8:7276258,9:284350,11:283860,12:9346537,13:284259,14:7355949,15:392508,16:524402,17:10693768,18:524060,19:524706,20:8598269,21:6463375,22:8441703,23:8455453,24:9261466,25:8808811,26:8748478,27:8759450,28:12996033,29:9315123,30:10618463,31:6979680,32:11481354,33:14578473,34:15137468,35:13127133,36:14621125,37:14649358,38:14597306,39:14541972,40:9157148,41:10526598,42:7893958,43:44077,44:2379038,45:7314237,47:8573135,48:14424717,49:1027472,50:8596360,51:10478508,52:12199392,53:14633604,54:14815090,56:14612610,57:8750923,58:1009644,59:380332,60:8999878,61:9424523,62:13472608,63:14631258,64:12947700,65:911114,66:210200,67:10221348,68:6752719,69:10079737,70:6632328,71:6304233,72:9295719,73:7436634,74:8133598,75:8138324,76:8191910,77:10226290,78:10859555,79:11200092,80:7369961,81:8902659,82:8665647,84:10648686,85:10871926,86:8576978,88:8405532,90:9314940,91:10282255,93:8802134,94:9426689,95:5276044,96:1286941,97:1286941,99:10476616,100:10477770,101:10477770,102:8595447,103:12733340,104:8458597,108:7073973,109:6614206,110:3993167,111:524046,112:3993167,113:9302081,114:14625389,115:4531927,116:6647943,117:4531927,118:8529206,120:8231823,121:12709654,122:8231823,123:12993656,124:10496793,125:7314238,126:10496793,127:8290909,128:12375569,129:11950190,130:10211392,131:12375569,132:15138118,133:603591,134:209771,135:15138118,136:13518107,137:26458,138:3347783,139:13518107,140:228755,141:8291251,142:14580156};
 
 var STORAGE_KEY = 'scifi_read_tracker_v1';
 var readState = {};
@@ -417,10 +424,10 @@ try { var cc = localStorage.getItem('scifi_covers_v1'); if (cc) coverCache = JSO
 function getCoverWrap(idx) {
     var cid = coverMap[idx] || coverCache[idx];
     if (cid) {
-        return '<div class="cover-wrap"><img class="cover-img" src="https://covers.openlibrary.org/b/id/' + cid + '-S.jpg" alt="" loading="lazy"></div>';
+        return '<div class="book-cover"><img class="cover-img" src="https://covers.openlibrary.org/b/id/' + cid + '-M.jpg" alt="" loading="lazy"></div>';
     }
     // Placeholder + lazy-load trigger
-    return '<div class="cover-wrap"><div class="cover-placeholder cover-img" data-idx="' + idx + '" data-loaded="0">📖</div></div>';
+    return '<div class="book-cover"><div class="cover-placeholder cover-img" data-idx="' + idx + '" data-loaded="0">📖</div></div>';
 }
 
 function renderList() {
@@ -465,7 +472,7 @@ function renderList() {
         if (b.tags && b.tags.indexOf('series') >= 0) badges += '<span class="badge badge-series">📚 Serie</span>';
         if (b.tags && b.tags.indexOf('de') >= 0) badges += '<span class="badge badge-de">🇩🇪 DE</span>';
         grid.innerHTML += '<div class="' + cls + '">' +
-            '<div class="book-head">' + getCoverWrap(i) + '<div>' +
+            '<div class="book-head">' + getCoverWrap(i) + '<div class="book-info">' +
             '<div class="book-title">' +
             '<label class="read-cb"><input type="checkbox" ' + (r ? 'checked' : '') + ' onclick="toggleRead(' + i + ')"><span class="cb-mark"></span></label>' +
             b.title + badges + '</div>' +
@@ -606,7 +613,7 @@ updateProgress();
                     try { localStorage.setItem('scifi_covers_v1', JSON.stringify(coverCache)); } catch(e) {}
                     var placeholder = document.querySelector('.cover-placeholder[data-idx="' + idx + '"]');
                     if (placeholder) {
-                        placeholder.outerHTML = '<img class="cover-img" src="https://covers.openlibrary.org/b/id/' + cid + '-S.jpg" alt="" loading="lazy">';
+                        placeholder.outerHTML = '<img class="cover-img" src="https://covers.openlibrary.org/b/id/' + cid + '-M.jpg" alt="" loading="lazy">';
                     }
                     console.log('[covers] Found: ' + b.title + ' → #' + cid);
                 }
