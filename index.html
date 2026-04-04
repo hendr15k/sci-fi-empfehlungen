@@ -117,6 +117,15 @@ footer a{color:var(--accent)}
 .planer-rec strong{color:#e040fb}
 .planer-rec .match-badge{background:#8b00ff;color:#fff;padding:2px 10px;border-radius:20px;font-size:.75em;font-weight:600}
 
+
+.planer-section{margin:30px 0;padding:25px;background:linear-gradient(135deg,#2a1a4e,#1a1a2e);border:2px solid #8b00ff;border-radius:16px;position:relative}
+.planer-badge{position:absolute;top:-12px;left:20px;font-size:.8em;font-weight:700;padding:3px 12px;border-radius:8px;color:#fff;background:#8b00ff}
+.planer-btn{width:100%;padding:12px 20px;background:linear-gradient(135deg,#8b00ff,#6c00eb);color:#fff;border:none;border-radius:10px;font-size:1em;cursor:pointer;font-weight:600;transition:transform .2s,box-shadow .2s}
+.planer-btn:hover{transform:translateY(-2px);box-shadow:0 4px 16px rgba(139,0,255,.3)}
+.planer-rec{background:rgba(139,0,255,.08);paddding:12px 16px;border-radius:10px;font-size:.95em;display:flex;justify-content:space-between;align-items:center;margin-bottom:8px}
+.planer-rec strong{color:#e040fb}
+.planer-rec .match-badge{background:#8b00ff;color:#fff;padding:2px 10px;border-radius:20px;font-size:.75em;font-weight:600}
+
 </style>
 </head>
 <body>
@@ -230,6 +239,16 @@ footer a{color:var(--accent)}
 </div>
 
 <div id="statsInfo" style="text-align:center;color:var(--text-muted);margin:20px 0;font-size:.9em">144 Titel</div>
+
+
+<!-- READING PLANER -->
+<div id="planerSection" class="planer-section">
+    <div class="planer-badge">📖 READING-PLANER</div>
+    <div id="planerContent">
+        <button class="planer-btn" onclick="generateRecommendations()">Klick mich — Zeig mir was ich als Nächstes lesen soll</button>
+        <div id="planerResults"></div>
+    </div>
+</div>
 
 
 <!-- READING PLANER -->
@@ -655,6 +674,59 @@ var bookRecs={0:[4,41,80,93,63],1:[0,3,4,13,41],2:[30,0,4,17,28],3:[0,1,4,13,41]
     // Start 3 parallel
     for (var i = 0; i < maxActive; i++) runNext();
 })();
+
+
+
+// Reading-Planer
+function generateRecommendations() {
+    if (typeof bookRecs === 'undefined') { return; }
+    var readIds = [];
+    for (var k in readState) {
+        if (readState[k] && readState[k] === 1) {
+            readIds.push(parseInt(k));
+        }
+    }
+    if (readIds.length === 0) {
+        document.getElementById('planerResults').innerHTML =
+            '<div class="planer-rec">Markiere zuerst Bücher als gelesen (Status-Button)!</div>';
+        return;
+    }
+    var scores = {};
+    for (var r = 0; r < readIds.length; r++) {
+        var rid = readIds[r];
+        if (bookRecs[rid]) {
+            for (var j = 0; j < bookRecs[rid].length; j++) {
+                var bid = bookRecs[rid][j];
+                if (!readState[bid] || readState[bid] !== 1) {
+                    scores[bid] = (scores[bid] || 0) + 1;
+                }
+            }
+        }
+    }
+    var sorted = [];
+    for (var bid in scores) { sorted.push({id: parseInt(bid), score: scores[bid]}); }
+    sorted.sort(function(a, b) { return b.score - a.score; });
+    var top = sorted.slice(0, 8);
+    if (top.length === 0) {
+        document.getElementById('planerResults').innerHTML =
+            '<div class="planer-rec">Du hast alle empfohlenen Bücher! 🎉</div>';
+        return;
+    }
+    var lines = [];
+    for (var i = 0; i < top.length; i++) {
+        var b = books[top[i].id];
+        var stars = '';
+        for (var s = 0; s < b.rating; s++) stars += '⭐';
+        lines.push('<div class="planer-rec"><div><strong>' + b.title + '</strong><br>' +
+            b.author + '<br><small>' + stars + ' ' + b.genre + '</small></div>' +
+            '<span class="match-badge">🔥 ' + top[i].score + ' Matches</span></div>');
+    }
+    document.getElementById('planerResults').innerHTML =
+        '<div style="margin-top:16px">' +
+        '<h3 style="font-size:1em;color:var(--text);margin-bottom:12px;opacity:.8">Dein persönlicher Leseplan (' +
+        readIds.length + ' gelesen → ' + top.length + ' Empfehlungen)</h3>' +
+        lines.join('') + '</div>';
+}
 
 
 
