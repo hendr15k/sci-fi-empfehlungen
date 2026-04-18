@@ -125,7 +125,7 @@ footer a{color:var(--accent)}
 <header>
     <button class="theme-toggle" id="themeToggle" title="Hell/Dunkel wechseln">🌙</button>
     <h1>🚀 Sci-Fi Empfehlungen</h1>
-    <div class="meta"><span id="metaTotalCount">144</span> Titel, 35+ Subgenres — 4.04.2026 <span class="badge">v8: 100% Covers + Reading Stats</span></div>
+    <div class="meta"><span id="metaTotalCount">144</span> Titel, <span id="metaReadCount" style="color:#00c853;font-weight:700">0</span> gelesen — 4.04.2026 <span class="badge">v9: CSV-Fix + Read Count Badge</span></div>
 </header>
 <div class="container">
 
@@ -398,6 +398,8 @@ function updateProgress() {
     if (totalCountEl) totalCountEl.textContent = total;
     var metaTotalCountEl = document.getElementById('metaTotalCount');
     if (metaTotalCountEl) metaTotalCountEl.textContent = total;
+    var metaReadCountEl = document.getElementById('metaReadCount');
+    if (metaReadCountEl) metaReadCountEl.textContent = read;
     var statTotalEl = document.getElementById('statTotal');
     if (statTotalEl) statTotalEl.textContent = total;
     var filterAllBtn = document.getElementById('filterAllBtn');
@@ -479,13 +481,21 @@ document.getElementById('resetBtn').onclick = function() {
 
 // Export functions
 function exportCSV() {
-    var rows = ['Titel,Autor,Jahr,Genre,Rating,Gelesen'];
+    var rows = ['Titel;Autor;Jahr;Genre;Rating;Gelesen'];
     for (var i = 0; i < books.length; i++) {
         var b = books[i];
         var gelesen = readState[i] ? 'Ja' : 'Nein';
-        rows.push('"' + b.title + '","' + b.author + '",' + b.year + ',"' + b.genre + '",' + b.rating + ',' + gelesen);
+        // Semicolon separator avoids CSV escaping issues with German umlauts and commas in titles
+        rows.push([
+            b.title.replace(/;/g, ','),
+            b.author.replace(/;/g, ','),
+            b.year,
+            b.genre.replace(/;/g, ','),
+            b.rating,
+            gelesen
+        ].join(';'));
     }
-    downloadFile(rows.join('\n'), 'scifi-empfehlungen-' + new Date().toISOString().slice(0, 10) + '.csv', 'text/csv');
+    downloadFile(rows.join('\n'), 'scifi-empfehlungen-' + new Date().toISOString().slice(0, 10) + '.csv', 'text/csv;charset=utf-8');
 }
 
 function exportJSON() {
