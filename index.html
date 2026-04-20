@@ -277,6 +277,18 @@ footer a{color:var(--accent)}
 
 </div>
 
+<!-- Reading Challenge -->
+<div class="challenge-section" style="margin:20px 0;padding:16px;background:var(--card);border:1px solid var(--border);border-radius:12px;text-align:center">
+  <div style="font-weight:700;margin-bottom:8px">🎯 Lese-Challenge <span id="challengeYear"></span></div>
+  <div style="display:flex;align-items:center;justify-content:center;gap:12px;flex-wrap:wrap">
+    <span><span id="challengeRead" style="font-size:1.4em;font-weight:800;color:#00c853">0</span> / <span id="challengeGoal">12</span> Bücher</span>
+    <input type="range" id="challengeSlider" min="1" max="50" value="12" style="width:120px;accent-color:#00c853" title="Jahresziel anpassen">
+    <span id="challengePct" style="font-weight:700;color:var(--accent)">0%</span>
+  </div>
+  <div style="margin-top:8px;height:8px;background:var(--border);border-radius:4px;overflow:hidden"><div id="challengeFill" style="height:100%;background:#00c853;border-radius:4px;width:0%;transition:width .3s"></div></div>
+  <div id="challengeMsg" style="margin-top:6px;font-size:.85em;color:var(--text-muted)"></div>
+</div>
+
 <div class="book-grid" id="grid"></div>
 
 <div style="display:flex;gap:10px;justify-content:center;margin:15px 0">
@@ -380,7 +392,7 @@ function renderList() {
 
 function toggleRead(idx) {
     if (readState[idx]) delete readState[idx]; else readState[idx] = true;
-    saveState(); updateProgress(); renderList();
+    saveState(); updateProgress(); updateChallenge(); renderList();
 }
 
 function updateProgress() {
@@ -475,7 +487,7 @@ document.getElementById('exportJsonBtn').onclick = exportJSON;
 
 document.getElementById('resetBtn').onclick = function() {
     if (confirm('Alle gelesenen Bücher zurücksetzen?')) {
-        readState = {}; saveState(); updateProgress(); renderList();
+        readState = {}; saveState(); updateProgress(); updateChallenge(); renderList();
     }
 };
 
@@ -616,6 +628,53 @@ function generateRecommendations() {
 }
 
 
+
+// ========== Reading Challenge ==========
+var CHALLENGE_KEY = 'scifi_challenge_goal';
+function loadChallengeGoal() {
+    try { return parseInt(localStorage.getItem(CHALLENGE_KEY)) || 12; } catch(e) { return 12; }
+}
+function saveChallengeGoal(val) {
+    try { localStorage.setItem(CHALLENGE_KEY, val); } catch(e) {}
+}
+function updateChallenge() {
+    var read = 0;
+    for (var k in readState) { if (readState[k]) read++; }
+    var goal = loadChallengeGoal();
+    document.getElementById('challengeRead').textContent = read;
+    document.getElementById('challengeGoal').textContent = goal;
+    document.getElementById('challengeSlider').value = goal;
+    document.getElementById('challengeYear').textContent = new Date().getFullYear();
+    var pct = goal > 0 ? Math.min(Math.round((read / goal) * 100), 100) : 0;
+    document.getElementById('challengePct').textContent = pct + '%';
+    document.getElementById('challengeFill').style.width = pct + '%';
+    var remaining = Math.max(goal - read, 0);
+    var monthsLeft = 12 - new Date().getMonth();
+    if (read >= goal) {
+        document.getElementById('challengeMsg').textContent = '🎉 Ziel erreicht! Weiter so!';
+        document.getElementById('challengeFill').style.background = '#ffd700';
+    } else if (monthsLeft > 0) {
+        var perMonth = (remaining / monthsLeft).toFixed(1);
+        document.getElementById('challengeMsg').textContent = remaining + ' ubrig — ~' + perMonth + ' Bucher/Monat notig';
+    } else {
+        document.getElementById('challengeMsg').textContent = remaining + ' Bucher ubrig fur dieses Jahr';
+    }
+}
+document.getElementById('challengeSlider').addEventListener('input', function() {
+    saveChallengeGoal(parseInt(this.value));
+    updateChallenge();
+});
+
+// ========== Keyboard Shortcuts ==========
+document.addEventListener('keydown', function(e) {
+    if (e.target.tagName === 'INPUT') return;
+    if (e.key === 'r' || e.key === 'R') { document.getElementById('randomBtn').click(); e.preventDefault(); }
+    if (e.key === 'f' || e.key === 'F') { document.getElementById('searchInput').focus(); e.preventDefault(); }
+    if (e.key === 'Escape') { document.getElementById('searchInput').value = ''; currentSearch = ''; renderList(); document.getElementById('searchInput').blur(); }
+});
+
+// Init challenge
+updateChallenge();
 
 // Reading-Planer
 </script>
